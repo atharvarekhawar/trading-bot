@@ -24,4 +24,26 @@ export class DepthManager {
         this.bids = depth.bids;
         this.asks = depth.asks;
     }
+
+    getRelevantDepth() {
+        let highestBid = -1000000000;
+        let lowestAsk = 1000000000;
+
+        Object.keys(this.bids).map(x => {
+            if (parseFloat(x) > highestBid) {
+                highestBid = parseFloat(x);
+            }
+        })
+
+        Object.keys(this.asks).map(x => {
+            if (parseFloat(x) < lowestAsk) {
+                lowestAsk = parseFloat(x);
+            }
+        });
+
+        return {
+            highestBid,
+            lowestAsk
+        }
+    }
 }
